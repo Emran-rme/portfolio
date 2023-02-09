@@ -73,11 +73,11 @@ const Home = ({ helmetTitle }) => {
       />
       <Box component="div" sx={{ display: "flex" }}>
         <Typography variant="h3" color="#F93C92">
-          {" {{..."}
+          {"{{"}
         </Typography>
         <Typography ref={nameEl} variant="h3" color="tomato" />
         <Typography variant="h3" color="#F93C92">
-          {"...}} "}
+          {"}}"}
         </Typography>
       </Box>
       <Box component="div" sx={{ display: "flex" }}>

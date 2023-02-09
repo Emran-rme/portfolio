@@ -33,6 +33,10 @@ function AppContainer() {
 
   const handlePageNumber = (event, newValue) => setPageNumber(newValue);
 
+  const handlePageChange = (index) => {
+    setPageNumber(index);
+  };
+
   const handleThemeChange = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
@@ -54,7 +58,7 @@ function AppContainer() {
         <DrawerActionButton />
 
         <PagesContainer>
-          <SwipeableViews index={pageNumber} onChangeIndex={handlePageNumber}>
+          <SwipeableViews index={pageNumber} onChangeIndex={handlePageChange}>
             <Page pageNumber={pageNumber} index={0}>
               <Home helmetTitle="وبسایت عمران رستم زاده | صفحه اصلی" />
             </Page>
