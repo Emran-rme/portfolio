@@ -11,95 +11,73 @@ import { firefly, links } from "../constants/particles";
 import { Helmet } from "react-helmet-async";
 
 const Home = ({ helmetTitle }) => {
-  const [index, setIndex] = useState(0);
-  const nameEl = useRef(null);
+    const [index, setIndex] = useState(0);
 
-  const strings = [
-    "توسعه دهنده فول استک هستم",
-    "فریلنسر هستم",
-    "محتوا ساز دنیای برنامه نویسی هستم",
-    "مدرس برنامه نویسی هستم",
-  ];
+    const strings = [
+        " برنامه‌نویسی این امکان رو به شما می‌ده تا در مورد خودِ «فکر کردن» فکر کنید و وقتی‌ هم که دیباگ می‌کنید، در مورد خودِ «یادگیری» یاد می‌گیرید.",
+        " هر کسی باید یاد بگیره که چه‌طور کد بزنه چرا که برنامه‌نویسی به شما یاد می‌ده که چه‌طور فکر کنید.",
+        " در آینده برنامه‌نویسان نقش جادوگران رو بازی خواهند کرد چرا که قدرتی جادویی دارن که دیگر افراد جامعه فاقد اون هستن.",
+        " طراحی خوب بیش از آنکه هزینه به بار بیاره، ارزش‌آفرینی می‌کنه.",
+    ];
 
-  useEffect(() => {
-    const typedName = new Typed(nameEl.current, {
-      strings: [" عمران رستم زاده "],
-      typeSpeed: 110,
-      backSpeed: 80,
-      backDelay: 50,
-      showCursor: false,
-    });
+    useEffect(() => {
+        const stringsTransition = setInterval(() => {
+            setIndex((index) => index + 1);
+        }, 5000);
 
-    const stringsTransition = setInterval(() => {
-      setIndex((index) => index + 1);
-    }, 3000);
+        return () => {
+            clearInterval(stringsTransition);
+        };
+    }, []);
 
-    return () => {
-      typedName.destroy();
-      clearInterval(stringsTransition);
-    };
-  }, []);
+    const pariclesInit = useCallback(async (engin) => {
+        await loadFull(engin);
+    }, []);
 
-  const pariclesInit = useCallback(async (engin) => {
-    await loadFull(engin);
-  }, []);
+    const particlesLoaded = useCallback(async (container) => {
+        await console.log(container);
+    }, []);
 
-  const particlesLoaded = useCallback(async (container) => {
-    await console.log(container);
-  }, []);
-
-  return (
-    <Box
-      sx={{
-        backgroundImage: `url(${bg02})`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Helmet>
-        <title> {helmetTitle}</title>
-      </Helmet>
-      <Particles
-        id="tsparticles"
-        init={pariclesInit}
-        loaded={particlesLoaded}
-        options={firefly}
-      />
-      <Box component="div" sx={{ display: "flex" }}>
-        <Typography variant="h3" color="#F93C92">
-          {"{{"}
-        </Typography>
-        <Typography ref={nameEl} variant="h3" color="tomato" />
-        <Typography variant="h3" color="#F93C92">
-          {"}}"}
-        </Typography>
-      </Box>
-      <Box component="div" sx={{ display: "flex" }}>
-        <TextTransition springConfig={presets.wobbly}>
-          <Typography
-            variant="h4"
-            color="whitesmoke"
+    return (
+        <Box
             sx={{
-              mt: 4,
-              textDecoration: "underline",
-              textDecorationColor: "#F93C92",
+                backgroundImage: `url(${bg02})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "center",
             }}
-          >
-            {strings[index % strings.length]}
-          </Typography>
-        </TextTransition>
-        <Typography variant="h4" color="whitesmoke" sx={{ mt: 4, mr: 1 }}>
-          من یک
-        </Typography>
-      </Box>
-    </Box>
-  );
+        >
+            <Helmet>
+                <title> {helmetTitle}</title>
+            </Helmet>
+            <Particles
+                id="tsparticles"
+                init={pariclesInit}
+                loaded={particlesLoaded}
+                options={links}
+            />
+            <Box component="div" sx={{ display: "flex", marginTop: "1rem" }}>
+                <TextTransition springConfig={presets.wobbly}>
+                    <Typography
+                        variant="h6"
+                        color="whitesmoke"
+                        sx={{
+                            mt: 4,
+                            textDecoration: "underline",
+                            textDecorationColor: "#F93C92",
+                        }}
+                    >
+                        {strings[index % strings.length]}
+                    </Typography>
+                </TextTransition>
+            </Box>
+        </Box>
+    );
 };
 
 export default Home;

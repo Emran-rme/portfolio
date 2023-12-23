@@ -42,7 +42,7 @@ const Contact = ({ helmetTitle }) => {
           text=" ارتباط با من"
         />
         <Grid container sx={{ mt: 5 }}>
-          <Slide
+          {/* <Slide
             direction="up"
             in={loading}
             style={{ transitionDelay: loading ? "200ms" : "0ms" }}
@@ -52,7 +52,7 @@ const Contact = ({ helmetTitle }) => {
                 <ContactForm />
               </Card>
             </Grid>
-          </Slide>
+          </Slide> */}
           <Slide
             direction="up"
             in={loading}
